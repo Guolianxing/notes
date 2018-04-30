@@ -16,13 +16,13 @@
         <url-pattern>/test/testServlet</url-pattern>
     </servlet-mapping>
 ```
-    * <url-pattern> 子元素中的访问路径必须以`/`开头，`/`代表当前Web应用程序的根目录，且路径名可以是多级目录的形式。
-    * Servlet路径映射的优先级高于Web应用所映射的本地文件系统中的文件
-    * 同一个Servlet可以被映射到多个URL上，即多个<servlet-mapping>元素的<servlet-name>子元素的设置值可以是同一个Servlet的注册名。
-    * 在Servlet映射的URL中可以使用`*`通配符，但是只能有两种格式
-        * `*.拓展名` 在`*`前面不能有目录分隔符`/`，例如: `*.do`表示匹配所有以`.do`结尾的URL，`/action/*.do`是无效的映射路径。
-        * 以正斜杠`/`开头并以`/*`结尾，例如: `/*`匹配当前Web应用程序下所有URL，`action/*`匹配当前Web应用程序下的`/action`子路径下的所有URL。
-        * 匹配原则：采用最具体匹配原则来查找请求的URL的映射， 其中`*.拓展名`的匹配优先级最低。
+* <url-pattern> 子元素中的访问路径必须以`/`开头，`/`代表当前Web应用程序的根目录，且路径名可以是多级目录的形式。
+* Servlet路径映射的优先级高于Web应用所映射的本地文件系统中的文件
+* 同一个Servlet可以被映射到多个URL上，即多个<servlet-mapping>元素的<servlet-name>子元素的设置值可以是同一个Servlet的注册名。
+* 在Servlet映射的URL中可以使用`*`通配符，但是只能有两种格式
+    * `*.拓展名` 在`*`前面不能有目录分隔符`/`，例如: `*.do`表示匹配所有以`.do`结尾的URL，`/action/*.do`是无效的映射路径。
+    * 以正斜杠`/`开头并以`/*`结尾，例如: `/*`匹配当前Web应用程序下所有URL，`action/*`匹配当前Web应用程序下的`/action`子路径下的所有URL。
+    * 匹配原则：采用最具体匹配原则来查找请求的URL的映射， 其中`*.拓展名`的匹配优先级最低。
 
 2. 使用@WebServlet注解  
 Servlet3.0支持@WebServlet注解，将一个继承HttpServlet的类标注为可以处理用户请求的Servlet。
