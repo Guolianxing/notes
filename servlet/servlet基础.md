@@ -16,9 +16,9 @@
         <url-pattern>/test/testServlet</url-pattern>
     </servlet-mapping>
 ```
-* <url-pattern> 子元素中的访问路径必须以`/`开头，`/`代表当前Web应用程序的根目录，且路径名可以是多级目录的形式。
+* `<url-pattern>` 子元素中的访问路径必须以`/`开头，`/`代表当前Web应用程序的根目录，且路径名可以是多级目录的形式。
 * Servlet路径映射的优先级高于Web应用所映射的本地文件系统中的文件
-* 同一个Servlet可以被映射到多个URL上，即多个<servlet-mapping>元素的<servlet-name>子元素的设置值可以是同一个Servlet的注册名。
+* 同一个Servlet可以被映射到多个URL上，即多个`<servlet-mapping>`元素的`<servlet-name>`子元素的设置值可以是同一个Servlet的注册名。
 * 在Servlet映射的URL中可以使用`*`通配符，但是只能有两种格式
     * `*.拓展名` 在`*`前面不能有目录分隔符`/`，例如: `*.do`表示匹配所有以`.do`结尾的URL，`/action/*.do`是无效的映射路径。
     * 以正斜杠`/`开头并以`/*`结尾，例如: `/*`匹配当前Web应用程序下所有URL，`action/*`匹配当前Web应用程序下的`/action`子路径下的所有URL。
@@ -33,7 +33,7 @@ Servlet3.0支持@WebServlet注解，将一个继承HttpServlet的类标注为可
 |value|Servlet的访问路径映射|
 |urlPatterns|等价于value，且二者不能同时存在|
 |loadOnStartup|指定加载顺序，默认为-1|
-|initParams|指定一组初始化参数，对应<init-param>标签|
+|initParams|指定一组初始化参数，对应`<init-param>`标签|
 |asyncSupported|声明是否支持异步操作模式|
 
 ```java
@@ -56,7 +56,7 @@ public class HelloServlet extends HttpServlet {
 ```
 
 #### 三. 缺省Servlet
-&emsp;&emsp;如果某个Servlet的映射路径仅仅为一个正斜杠`/`，那么这个Servlet就成为当前Web应用程序的缺省Servlet，凡是在web.xml文件中找不到匹配的<servlet-mapping>元素的URL，它们的访问请求都将交给缺省Servlet处理，也就是说，缺省Servlet用于处理所有其他Servlet都不处理的访问请求。在tomcat的安装目录\conf\web.xml文件中注册了一个缺省Servlet：
+&emsp;&emsp;如果某个Servlet的映射路径仅仅为一个正斜杠`/`，那么这个Servlet就成为当前Web应用程序的缺省Servlet，凡是在web.xml文件中找不到匹配的`<servlet-mapping>`元素的URL，它们的访问请求都将交给缺省Servlet处理，也就是说，缺省Servlet用于处理所有其他Servlet都不处理的访问请求。在tomcat的安装目录\conf\web.xml文件中注册了一个缺省Servlet：
 ```xml
     <servlet>
         <servlet-name>default</servlet-name>
@@ -86,7 +86,7 @@ Servlet容器按照下面的过程来调用一个Servlet程序：
 4. 创建一个用于封装HTTP请求消息的HttpServletRequest对象和一个代表HTTP响应消息的HttpServletResponse对象，然后调用Servlet的service()方法并将请求和响应对象作为参数传递进去。
 5. 在Web程序被停止或重启之前，Servlet容器将卸载其中运行的Servlet。在卸载Servlet之前，容器将调用Servlet的destroy()方法，以便执行一些清理工作，如释放一些被改Servlet占用的资源。在卸载某个Servlet之后，该Servlet实例对象编程垃圾，等待JVM的垃圾收集器将其从内存中清除。
 
-&emsp;&emsp;在<servlet>中可以嵌套一个<load-on-startup>元素，用于指定Servlet被装载的时机和顺序，如果该元素内容被设置为0或一个正整数，它指定该Servlet在Web应用程序启动时就被实例化和调用它的init()方法，且这个数字越小，Servlet被装载的时间也越早，相同数字的Servlet之间的装载顺序由Servlet容器自己决定。如果为负数，则由Servlet容器自己决定什么时候装载。该元素中数值的大小可用来解决Servlet之间的以来关系。
+&emsp;&emsp;在`<servlet>`中可以嵌套一个`<load-on-startup>`元素，用于指定Servlet被装载的时机和顺序，如果该元素内容被设置为0或一个正整数，它指定该Servlet在Web应用程序启动时就被实例化和调用它的init()方法，且这个数字越小，Servlet被装载的时间也越早，相同数字的Servlet之间的装载顺序由Servlet容器自己决定。如果为负数，则由Servlet容器自己决定什么时候装载。该元素中数值的大小可用来解决Servlet之间的以来关系。
 
 #### 四. ServletConfig接口
 &emsp;&emsp;Servlet容器将代表Servlet容器和Servlet的配置参数信息一并封装到一个ServletConfig对象中，并在初始化Servlet实例对象的时候传递给该Servlet。ServletConfig接口则定义了ServletConfig对象需要对外提供的方法，以便在Servlet程序中可以调用这些方法来获取有关信息。
@@ -107,8 +107,8 @@ public void init() throws ServletException{
 }
 ```
 ServletConfig中的方法：
-* getInitParameterNames方法：在web.xml文件中可以为Servlet设置若干个初始化参数，此方法可以反悔一个Enumeration集合对象，该集合对象中包含在web.xml文件中为当前Servlet设置的所有初始化参数的名称，即<init-param>子元素中的<param-name>节点中的值。
-* getInitParameter方法，返回<init-param>元素中<param-name>对应的<param-value>中的值，若指定参数不存在，返回NULL。
+* getInitParameterNames方法：在web.xml文件中可以为Servlet设置若干个初始化参数，此方法可以反悔一个Enumeration集合对象，该集合对象中包含在web.xml文件中为当前Servlet设置的所有初始化参数的名称，即`<init-param>`子元素中的`<param-name>`节点中的值。
+* getInitParameter方法，返回`<init-param>`元素中`<param-name>`对应的`<param-value>`中的值，若指定参数不存在，返回NULL。
 * getServletName方法，返回Servlet注册名称。
 * getServletContext方法，返回该web应用的ServletContext对象的引用。
 
@@ -229,7 +229,7 @@ public class TestServlet extends HttpServlet {
 4. 访问资源文件
 ServletContext接口中定义了一些用于访问web应用程序内部资源文件的方法：
     * getResourcePaths方法，返回一个Set集合对象，该Set对象中包含某个资源目录中的所有子目录和文件的路径名称，每个路径名称都以相对于整个web应用程序的根目录形式表示，即都以`/`开头，其中每个目录路径的最后也都由`/`结尾。  
-    如果根目录下有`/index.jsp`，`/WEB-INF/web.xml`，运行getResourcePaths("/)的结果是`[/index.jsp, /WEB-INF/]`。
+    如果根目录下有`/index.jsp`，`/WEB-INF/web.xml`，运行`getResourcePaths("/")`的结果是`[/index.jsp, /WEB-INF/]`。
     * getResource方法，返回映射到某个资源上的URL对象，入参必须是一个以`/`开头的资源路径名，`/`表示web根目录。
     * getResourceAsStream，返回连接到某个资源上的InputStream对象，这个方法实际上就是打开了getResource方法返回的URL对象的输入流。  
     与ClassLoader加载资源不同，ClassLoader只能加载类加载路径下的资源，即`/WEB-INF/classes/`，而ServletContext可以访问整个web应用下的资源文件。  
