@@ -103,7 +103,7 @@ In ServletTwo
 /test/two
 userName=tomcat
 ```
-可以看到调用forward方法，会修改HttpServletRequest对象中的信息。
+可以看到调用forward方法，会修改HttpServletRequest对象中的信息，但无论是include还是forward，浏览器地址栏中的地址一直保持`http://localhost:8080/test/one?userId=1`不变。
 
 修改ServletOne：
 ```java
