@@ -11,7 +11,7 @@ cd /usr
 tar xzf jdk-8u161-linux-x64.tar.gz -C /usr/java
 ```
 4. 设置环境变量
-编辑`/etc/profile`，添加一下内容：
+编辑`/etc/profile`，添加以下内容：
 ```shell
 # set java environment
 export JAVA_HOME=/usr/java/jdk1.8.0_161
