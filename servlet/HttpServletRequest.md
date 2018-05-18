@@ -4,8 +4,8 @@
 HTTP请求消息的请求行可以分为三部分：请求方式、资源路径和HTTP协议版本，HttpServletRequest接口中定义了若干获取请求行中各个部分的方法。
 1. `getMethod`方法：返回HTTP请求消息中的请求方式，如`GET`，`post`等。
 2. `getRequestURI`方法：返回请求行中的资源名部分，也就是位于`URL的主机和端口之后，参数部分之前的那部分`，如：   
-对于`http://localhost:8080/test/one?userName=tom&isDelete=0`，该方法返回`/test/on`。
-3. `getQueryString`方法：返回请求行中的参数部分，对上面的请求返回`userName=tom&isDelete=0`，如果资源路径后面没有参数备份，返回`null`。
+对于`http://localhost:8080/test/one?userName=tom&isDelete=0`，该方法返回`/test/one`。
+3. `getQueryString`方法：返回请求行中的参数部分，对上面的请求返回`userName=tom&isDelete=0`，如果资源路径后面没有参数部分，返回`null`。
 4. `getProtocol`方法：返回请求行中的协议名和版本。
 5. `getContextPath`方法：返回请求URL所属的web应用程序的路径，这个路径以`/`开头，表示相对于整个web站点的根目录，路径结尾不含`/`，如果请求URL属于web站点的根目录返回空字符串。
 6. `getPathInfo`方法：返回请求URL中的额外路径信息，即请求URL中位于Servlet的路径之后和查询参数之前的内容，以`/`开头，如果请求URL中没有额外信息，返回null。
