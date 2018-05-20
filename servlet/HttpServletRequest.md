@@ -79,3 +79,27 @@ getServletPath: /user
 6. `getContentType`方法：直接返回`Content-Type`头字段值。
 7. `getContentLength`方法：直接返回`Content-Length`头字段值，结果为int类型。
 8. `getCharacterEncoding`方法：用于获取请求消息的实体部分的字符集编码，通常从`Content-Type`头字段中进行提取。
+#### 四. 获取请求参数
+1. `getParameter`方法：返回某个指定名称的参数的值，如果请求消息中没有包含指定的参数返回null，如果指定参数存在但没有设置值返回空字符串，如果请求消息包含有多个该指定名称的参数，返回第一个出现的参数值。
+2. `getParameterValues`方法，返回请求消息中的同一个参数名所对应的所有参数值，返回值类型是`String[]`。
+3. `getParameterNames`方法，返回包含请求消息中所有参数名的Enumeration对象。
+4. `getParameterMap`方法，将请求消息中所有参数名和值装进一个Map对象中。
+#### 五. 获取请求消息的实体内容（常用于POST请求，GET请求不包含实体内容）
+以POST方式提交的表单，其中的表单字段元素信息都将作为HTTP消息的实体内容发送给web服务器，对于HTTP请求消息中的实体内容，ServletRequest以输入流的方式提供给Servlet读取，getInputStream方法返回这个字节输入流对象，getReader方法返回一个代表实体内容的字符输入流对象。  
+```java
+ServletInputStream getInputStream() throws IOException;
+```
+```java
+BufferedReader getReader() throws IOException;
+```
+如果实体内容中包含二进制数据，那么只能使用getInputStream方法返回的输入流对象读取。   
+getReader方法返回的BufferedReader对象将实体内容中的字节数据按照请求消息中指定的字符集编码转化成文本字符串。    
+这两个方法互斥，对于同一个request对象只能调用其中一个。
+#### 六. 利用请求域属性传递信息
+1. `setAttribute`方法
+2. `getAttribute`方法
+3. `removeAttribute`方法
+4. `getAttributeNames`方法
+#### 七. setCharacterEncoding方法
+设置请求消息中的实体内容的字符集编码名称，只影响getParameter方法对POST方式下的`application/x-www-form-urlencoded`编码格式的实体内容进行URL解码的结果，而不能影响getParameter方法对HTTP请求消息的请求行中的URL地址后面的参数进行URL解码的结果。   
+如果要使用该方法，要在getParameter方法之前调用。
