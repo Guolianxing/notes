@@ -3,7 +3,7 @@
 ```html
 <meta charset="UTF-8">
 ```
-charset 属性规定 HTML 文档的字符编码，浏览器在显式网页文档时使用该字符集编码来显示其中内容。
+charset 属性规定 HTML 文档的字符编码，浏览器在显示网页文档时使用该字符集编码来显示其中内容。
 ```html
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 ```
