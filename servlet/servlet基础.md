@@ -190,7 +190,7 @@ public void service(ServletRequest req, ServletResponse res) throws ServletExcep
 4. doXXX方法：在HttpServlet中定义了针对HTTP协议中的各种请求方式的doXXX方法，并由3中重载的service方法根据请求类型调用相对应的doXXX方法，比如，收到GET请求就调用doGet方法。注意，如果我们自己编写的继承HttpServlet的类中重写了service方法，且没有用super.service()来显式调用父类中的service方法，doXXX方法将不会被调用。
 
 #### 六. ServletContext接口
-&emsp;&emsp;每个web应用程序分别用一个ServletContext对象来表示，ServletContext接口定义了ServletContext对象需要对外提供的方法，Servlet程序通过这些方法与Servlet容器进行通信，Servlet容器为每个weba应用程序创建一个对应的ServletContext对象。
+&emsp;&emsp;每个web应用程序分别用一个ServletContext对象来表示，ServletContext接口定义了ServletContext对象需要对外提供的方法，Servlet程序通过这些方法与Servlet容器进行通信，Servlet容器为每个web应用程序创建一个对应的ServletContext对象。
 1. 获取ServletContext
     * ServletConfig.getServletContext()，由于GenericServlet实现了ServletConfig接口，所以可以在Servlet中调用getServletContext()方法。
     * Servlet3.0中为HttpServletRequest对象增加了getServletContext()方法。
