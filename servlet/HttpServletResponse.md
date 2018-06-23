@@ -3,7 +3,7 @@
 &emsp;&emsp;Servlet程序通过调用ServletResponse对象中的方法可以向客户端回送基本的响应消息，HttpServletResponse是专用于HTTP协议的ServletResponse子接口，它用于封装HTTP消息，允许操控HTTP协议相关数据，包括响应头和状态码，支持cookie和session跟踪，HTTPServletResponse也定义了一系列用于描述各种HTTP状态码的常量。HttpServletResponse是Servlet规范中定义的接口，具体实现由Servlet容器实现。
 #### 二. 产生响应状态行
 1. 状态码常量  
-HttpServletResponse中定义了若干与状态码数值对应的常量，每个常量的名称以前缀SC开头，然后是状态码在Http规范中所表示的状态信息的应为单词的组合，如404是Not Found，在HttpServletResponse中定义的常量名称是`SC_NO_CONTENT`。
+HttpServletResponse中定义了若干与状态码数值对应的常量，每个常量的名称以前缀SC开头，然后是状态码在Http规范中所表示的状态信息的应为单词的组合，如404是Not Found，在HttpServletResponse中定义的常量名称是`SC_NOT_FOUND`。
 2. `setStatus`方法  
 setStatus方法用于设置HTTP响应消息的状态码，并生成响应状态行，正常情况下的响应码是200，web服务器默认自动生成这种正常状态下的响应状态行，因此通常情况下不需要调用该方法，只有在生成特殊状态码时才需要调用该方法。
 3. `sendError`方法  
