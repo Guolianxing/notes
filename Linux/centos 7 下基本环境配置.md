@@ -32,3 +32,30 @@ java version "1.8.0_161"
 Java(TM) SE Runtime Environment (build 1.8.0_161-b12)
 Java HotSpot(TM) 64-Bit Server VM (build 25.161-b12, mixed mode)
 ```
+
+#### 二. Mysql
+安装：
+```shell
+wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+rpm -ivh mysql-community-release-el7-5.noarch.rpm
+yum install mysql-community-server
+```
+重启mysql服务：
+```shell
+service mysqld restart
+```
+初次安装后root账户没密码，进入后设置密码：
+```shell
+mysql -u root
+```
+```sql
+set password for 'root'@'localhost' = password('yourpassword');
+```
+允许远程连接：
+```sql
+use mysql;
+update user set host = '%' where user = 'root';
+flush privileges;
+```
+执行第二句时报错：`ERROR 1062 (23000): Duplicate entry '%-root' for key 'PRIMARY'`，不用管。
+
