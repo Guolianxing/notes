@@ -74,4 +74,9 @@ make
 ./redis-server redis.conf
 ```
 `./redis-cli`启动redis客户端来访问服务端.
+关闭redis，在src目录下执行：
+```shell
+./redis-cli -p 6379 shutdown
+```
+
 
