@@ -60,23 +60,33 @@ flush privileges;
 执行第二句时报错：`ERROR 1062 (23000): Duplicate entry '%-root' for key 'PRIMARY'`，不用管。
 
 #### 三. redis
-上传安装包后解压，进入目录然后make：
+* 上传安装包后解压，进入目录然后make：
 ```shell
 tar xzf redis-4.0.10.tar.gz -C /usr
 cd /usr/redis-4.0.10/
 make
 ```
-修改启动方式，改为从配置文件启动，否则用默认的启动方式需要控制台一直打开，关闭控制台redis也随之关闭    
+* 修改启动方式，改为从配置文件启动，否则用默认的启动方式需要控制台一直打开，关闭控制台redis也随之关闭    
 `redis-4.0.10`目录下有个`redis.conf`文件，是默认的配置文件，复制一份到`src`目录下，然后修改`GENERAL`部分，将`daemonize no`修改为`daemonize yes`:   
 ![](../imgs/2018-08-17_193504.png)   
 然后从此配置文件启动redis，默认端口6379:  
 ```shell
 ./redis-server redis.conf
 ```
-`./redis-cli`启动redis客户端来访问服务端.
-关闭redis，在src目录下执行：
+`./redis-cli`启动redis客户端来访问服务端.     
+* 关闭redis，在src目录下执行：
 ```shell
 ./redis-cli -p 6379 shutdown
 ```
+* 设置密码：    
+进入客户端，`config get requirepass`查看是否设置密码，默认密码是空的   
+`config set requirepass "123456"`设置密码   
+设置密码后，客户端连接 redis 服务就需要通过`auth`命令验证密码，否则无法执行命令：进入客户端，执行`auth "123456"`。
+* 用java远程连接问题
+    * 链接超时：在确保防火墙，端口开放以及服务器安全组都没问题的情况下，修改上面的配置文件，将`NETWORK`部分的`bind 127.0.0.1`注释掉     
+    ![](../imgs/2018-08-17_214637.png)
+    * 提示说redis运行于保护模式（`protected mode`），设置个密码就行了，或者`config set protected-mode "no"`，或者修改配置文件，将`protected-mode yes`后面的yes改成no或密码。
+
+
 
 
