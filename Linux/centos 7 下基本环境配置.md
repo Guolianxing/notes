@@ -59,3 +59,19 @@ flush privileges;
 ```
 执行第二句时报错：`ERROR 1062 (23000): Duplicate entry '%-root' for key 'PRIMARY'`，不用管。
 
+#### 三. redis
+上传安装包后解压，进入目录然后make：
+```shell
+tar xzf redis-4.0.10.tar.gz -C /usr
+cd /usr/redis-4.0.10/
+make
+```
+修改启动方式，改为从配置文件启动，否则用默认的启动方式需要控制台一直打开，关闭控制台redis也随之关闭    
+`redis-4.0.10`目录下有个`redis.conf`文件，是默认的配置文件，复制一份到`src`目录下，然后修改`GENERAL`部分，将`daemonize no`修改为`daemonize yes`:   
+![](../imgs/2018-08-17_193504.png)   
+然后从此配置文件启动redis，默认端口6379:  
+```shell
+./redis-server redis.conf
+```
+`./redis-cli`启动redis客户端来访问服务端.
+
