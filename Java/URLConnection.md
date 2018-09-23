@@ -69,7 +69,6 @@ public class HttpUtil {
             }
             url = builder.toString();
         }
-        System.out.println(url);
         URLConnection connection = new URL(url).openConnection();
         if (headers != null) {
             for (Map.Entry<String, String> entry : headers.entrySet()) {
