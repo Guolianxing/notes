@@ -69,8 +69,9 @@ public class ProcessIdClassicConverter extends ClassicConverter {
 <configuration>
     <conversionRule conversionWord="pid" converterClass="com.test.config.ProcessIdClassicConverter"/>
     <conversionRule conversionWord="highlight" converterClass="com.test.config.HighlightingConverter"/>
-    <conversionRule conversionWord="magenta" converterClass="ch.qos.logback.core.pattern.color.MagentaCompositeConverter"/>
-    <conversionRule conversionWord="cyan" converterClass="ch.qos.logback.core.pattern.color.CyanCompositeConverter"/>
+    <!-- 这两个是logback自带的，所以可以不添加 -->
+    <!-- <conversionRule conversionWord="magenta" converterClass="ch.qos.logback.core.pattern.color.MagentaCompositeConverter"/>
+    <conversionRule conversionWord="cyan" converterClass="ch.qos.logback.core.pattern.color.CyanCompositeConverter"/> -->
     <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %magenta(%pid)  --- [%15.15thread] %cyan(%-40.40logger{39}) : %msg%n"/>
     <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %pid  --- [%15.15thread] %-40.40logger{39} : %msg%n"/>
     <property name="LOG_PATH" value="logs"/>
