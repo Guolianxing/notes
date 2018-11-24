@@ -194,12 +194,12 @@ class User {
     }
 }
 ```
-已id为key，name为value
+以id为key，name为value
 ```java
 Stream<User> stream = Stream.of(new User(1, "Tom"), new User(2, "Jack"), new User(3, "John"));
 Map<Integer, String> map = stream.collect(Collectors.toMap(User::getId, User::getName));
 ```
-已id为key，User对象自身为value
+以id为key，User对象自身为value
 ```java
 Map<Integer, User> map = stream.collect(Collectors.toMap(User::getId, Function.identity()));
 ```
