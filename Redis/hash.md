@@ -1,5 +1,5 @@
 ### hash
-> Redis hash 是一个string类型的field和value的映射表，hash特别适合用于存储对象。Redis 中每个 hash 可以存储 232 - 1 键值对（40多亿）。
+> Redis hash 是一个string类型的field和value的映射表，hash特别适合用于存储对象。Redis 中每个 hash 可以存储 2^(32 - 1) 键值对（40多亿）。
 
 * `hset key field value`：设置hash的fiel为指定值,如果key不存在,则先创建
 * `hsetnx key field value`：只有在字段 field 不存在时，设置哈希表字段的值
