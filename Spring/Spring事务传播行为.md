@@ -37,7 +37,8 @@ public void contextLoads() {
     msgService.A();
 }
 ```
-设置外层方法`A()`的事务传播为`PROPAGETION_REQUIRED`，然后分别配置`B()`的事务传播为七个中的之一:
+然后分别配置`B()`的事务传播为七个中的之一:   
+
 1. `PROPAGETION_REQUIRED`：如果当前没有事务，就新建一个事务；如果已经存在一个事务，就加入到这个事务中   
 ```java
 @Service
@@ -143,6 +144,7 @@ public void B() {
 ![](../imgs/2018-12-01-6.png)   
 此时注释掉`A()`上的事务注解，就会抛异常：   
 ![](../imgs/2018-12-01-7.png)   
+
 4. `PROPAGATION_REQUIRES_NEW`：新建事务，如果当前存在事务，就把当前事务挂起    
 当`A()`有事务：  
 ```java
@@ -168,6 +170,7 @@ public void B() {
 `B()`新建的内层事务与当前事务是完全互不干扰的，无论是提交还是回滚事务。       
 当`A()`没有事务时，则`B()`会新建一个事务：  
 ![](../imgs/2018-12-01-9.png)   
+
 5. `PROGAGATION_NOT_SUPPORTED`：以非事务的方式运行，如果当前存在事务，就把当前事务挂起   
 6. `PROGAGATION_NEVER`：以非事务方式运行，如果当前存在事务，就抛出异常   
 7. `PROGAGATION_NESTED`：如果当前存在事务，就在这个嵌套事务内运行；如果当前没有事务，就新建一个事务   
