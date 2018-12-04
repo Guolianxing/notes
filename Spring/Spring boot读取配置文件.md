@@ -56,7 +56,7 @@ spring boot在启动时会扫描以下位置的application.properties或yml文�
 * `file:./config/`
 * `file:./`
 * `classpath:/config/`
-* `classpath:/`
+* `classpath:/`    
 以上是按照优先级从高到低的顺序，虽然有优先级，但是所有位置的配置文件都会被加载，且都会生效，只不过对于相同的配置项是高优先级覆盖低优先级  
 
 2. `@ImportResource`注解用于引入一个spring配置文件，比如在`resources`目录下新建一个配置bean的xml文件，默认并不会被spring boot加载，需要在启动类上或其他bean上用该注解把文件引入进来：   
