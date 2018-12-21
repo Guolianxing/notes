@@ -34,11 +34,12 @@ public static void main(String[] args) {
 ![](../../imgs/2018-12-21_104509.png)  
 ![](../../imgs/2018-12-21_104536.png)  
 ![](../../imgs/2018-12-21_104633.png)   
-6. `add(E e)`方法：在列表尾部添加一个元素，添加之前要确保数组容量够用，即只添加一个元素的话，要确保数组容量至少为`size + `，否则需要扩容：   
+6. `add(E e)`方法：在列表尾部添加一个元素，添加之前要确保数组容量够用，即只添加一个元素的话，要确保数组容量至少为`size + 1`，否则需要扩容：   
     ![](../../imgs/2018-12-21_111433.png)  
     首先判断列表是否为空列表，即判断`elementData == EMPTY_ELEMENTDATA`，如果是，则最小容量为当前需要的最小容量和`DEFAULT_CAPACITY`(10)的最大值，这时才确定了真正用于扩容的最小容量，如果这个最小容量不超过数组的长度的话则不需要扩容，否则调用`grow`方法进行扩容。同时变量`modCount`加1，这个是用来防止并发修改用的。   
     ![](../../imgs/2018-12-21_111516.png)   
-    首先设新容量为旧容量的1.5倍，如果此时新容量还是比所需要的最小容量小，则新容量为所需的最小容量`minCapacity`；接着判断新容量是否比`MAX_ARRAY_SIZE`大，如是大，则先判断`minCapacity`是否整型溢出，没溢出的话判断`minCapacity`是否比`MAX_ARRAY_SIZE`大，如果大，将`newCapacity`设为整型最大值，反之设为`MAX_ARRAY_SIZE`，这时确定了新的数组容量，调用`Arrays.copyOf`扩容。即扩容时，首先为原容量的1.5倍，如果不能满足要求再看`MAX_ARRAY_SIZE`，如果`MAX_ARRAY_SIZE`也不能满足要求那就再取整型最大值`Integer.MAX_VALUE`。    
+    首先设新容量为旧容量的1.5倍，如果此时新容量还是比所需要的最小容量小，则新容量为所需的最小容量`minCapacity`；接着判断新容量是否比`MAX_ARRAY_SIZE`大，如是大，则先判断`minCapacity`是否整型溢出，没溢出的话判断`minCapacity`是否比`MAX_ARRAY_SIZE`大，如果大，将`newCapacity`设为整型最大值，反之设为`MAX_ARRAY_SIZE`，这时确定了新的数组容量，调用`Arrays.copyOf`扩容。   
+    即扩容时，首先为原容量的1.5倍，如果不能满足要求再看`MAX_ARRAY_SIZE`，如果`MAX_ARRAY_SIZE`也不能满足要求那就再取整型最大值`Integer.MAX_VALUE`。    
     由此可见，`ArrayList`的最大容量是`Integer.MAX_VALUE`，即`2^31-1`。   
     ![](../../imgs/2018-12-21_111555.png)  
     > 数组扩容是很耗费性能的操作，所以在使用`ArrayList`时如果能过估计存放元素的数量则尽量使用带设置容量的构造器，避免不必要的扩容。   
@@ -75,7 +76,7 @@ public static void main(String[] args) {
 16. `List<E> subList(int fromIndex, int toIndex)`：返回下标`[fromIndex, toIndex)`范围内的子序列。   
     ![](../../imgs/2018-12-21_191716.png)  
     先检查下标，然后返回子序列。  
-    返回的实际类型为`ArrayList`里的一个内部类`SubList`，继承自`AbstractList`，实现了列表的大部分常用功能： 
+    返回的实际类型为`ArrayList`里的一个内部类`SubList`，继承自`AbstractList`，实现了列表的大部分常用功能：    
     `parent`父列表，说明这个子列表是从哪个列表中创建的，`parentOffset`就是传入的`fromIndex`，即子列表起始位置相对于父列表起始位置的偏移量，`offset`是这个子列表起始位置相对于最原始的列表的起始位置的偏移量，`size`为子列表元素个数。  
     从源码可以看到，对子列表做的任何修改，都是通过下标变换后直接修改最原始列表的底层数组(`ArrayList.this.elementData`)，所以对子列表的修改，会反映到原列表上。
     ![](../../imgs/2018-12-21_192502.png)     
