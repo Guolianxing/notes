@@ -40,7 +40,7 @@ public PriorityQueue(int initialCapacity, Comparator<? super E> comparator) {
 还有由集合构造优先队列的构造器，第一个相当于将后两个整合了一下
 ```java
 public PriorityQueue(Collection<? extends E> c) {
-    // 由SortedSet或优先队列构造有限队列，比较器可以直接拿来用
+    // 由SortedSet或优先队列构造优先队列，比较器可以直接拿来用
     // 而且它们的toArray()方法返回的数组可以保证满足堆的要求(一个有序，另一个就是直接把堆的数组复制过来)
     if (c instanceof SortedSet<?>) {
         SortedSet<? extends E> ss = (SortedSet<? extends E>) c;
@@ -100,7 +100,7 @@ private void initFromCollection(Collection<? extends E> c) {
 private void heapify() {
     final Object[] es = queue;
     // i 是数组中最后一个非叶子节点，即树中倒数第二层中最右边的那个
-    // 从这个下标开始遍历，每次向下调整
+    // 从这个下标开始向前遍历，每次向下调整
     int n = size, i = (n >>> 1) - 1; 
     final Comparator<? super E> cmp;
     if ((cmp = comparator) == null)
