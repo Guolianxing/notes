@@ -54,11 +54,11 @@ static final class Node {
 
 #### 三. 独占获取状态
 ```java
-    public final void acquire(int arg) {
-        if (!tryAcquire(arg) &&
-            acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
-            selfInterrupt();
-    }
+public final void acquire(int arg) {
+    if (!tryAcquire(arg) &&
+        acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
+        selfInterrupt();
+}
 ```
 首先调用`tryAcquire`方法尝试获取状态，如果获取成功立即返回，如果获取失败，先调用`addWaiter`方法将该线程封装成节点，加入队列尾部，然后调用`acquireQueued`方法排队获取状态。    
 `tryAcquire`方法需要自己去实现，下面是`ReentrantLock`中非公平锁的实现：
