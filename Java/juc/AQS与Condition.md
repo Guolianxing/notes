@@ -31,7 +31,7 @@ public final void await() throws InterruptedException {
     int savedState = fullyRelease(node);
     int interruptMode = 0;
     // 当节点不在同步队列中，即在等待队列中时，在这里循环
-    // 知道节点进入同步队列竞争锁
+    // 直到节点进入同步队列竞争锁
     while (!isOnSyncQueue(node)) {
         // 如果节点还在等待队列中，park
         LockSupport.park(this);
@@ -47,7 +47,7 @@ public final void await() throws InterruptedException {
         reportInterruptAfterWait(interruptMode);
 }
 ```
-先调用`addConditionWaiter()`方法将当前线程加入`Condition`队列：
+先调用`addConditionWaiter()`方法将当前线程加入等待队列：
 ```java
 private Node addConditionWaiter() {
     Node t = lastWaiter;
