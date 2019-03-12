@@ -1,7 +1,7 @@
 ### AQS独占锁
 #### 一. AbstractQueuedSynchronizer
 juc包下的很多类，比如可重入锁，读写锁，闭锁等等，都是利用`AQS`来实现的，其在内部维护了一个FIFO的队列和一个状态变量，多个线程利用`CAS`去竞争获取状态，获取到状态的线程可以继续往下执行，当状态不可获取时，线程进队列，然后用`LockSupport`将线程`park`，等待队列中前面以获取到状态的线程唤醒它。    
-`AQS`有独占和共享两种模式，其子类需实现其中一种，且只能实现一种。   
+`AQS`有独占和共享两种模式，需子类去实现具体逻辑。   
 ```java
 private transient volatile Node head;
 
