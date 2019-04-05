@@ -1,6 +1,6 @@
 ### ThreadPoolExecutor
 #### 一. ThreadPoolExecutor的继承层次
-![](ThreadPoolExecutor.png)    
+![](../../imgs/ThreadPoolExecutor.png)    
 1. `Execotur`接口定义了一个执行被提交任务的方法`execute`，被提交的任务可以在一个新建的线程中执行，在一个池化的线程中执行，或者在调用`execute`方法的线程中同步执行，这取决于具体的实现类
 ```java
 public interface Executor {
