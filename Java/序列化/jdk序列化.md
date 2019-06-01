@@ -72,7 +72,6 @@ public interface Externalizable extends java.io.Serializable {
     void readExternal(ObjectInput in) throws IOException, ClassNotFoundException;
 }
 ```
-
 ```java
 import java.io.*;
 
@@ -136,7 +135,6 @@ User{userId=2, username='John'}
 ```
 * `Externalizable`默认不保存任何字段，所以`transient`关键字只能和`Serializable`一起使用。
 * `Externalizable`接口继承了`Serializable`接口，并添加了`writeExternal`和`readExternal`这两个方法，用于自定义自己的序列化和反序列化逻辑，和上面的实现了`Serializable`的类中添加自己的`writeObject`和`readObject`方法差不多，但是，*Externalizable在反序列化的时候，会先调用默认构造器，然后调用readRxternal方法，而Serializable不会调用任何构造器*
-
 
 ---
 相关链接：  
