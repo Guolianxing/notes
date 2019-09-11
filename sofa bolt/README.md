@@ -1,0 +1,1 @@
+参考[官方源码分析](http://mp.weixin.qq.com/mp/homepage?__biz=MzUzMzU5Mjc1Nw==&hid=2&sn=cb8f4ae52d71b593e5d4d4b154eb152d&scene=18#wechat_redirect)
